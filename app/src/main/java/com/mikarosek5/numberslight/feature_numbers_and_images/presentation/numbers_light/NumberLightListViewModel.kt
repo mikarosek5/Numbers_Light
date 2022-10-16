@@ -1,5 +1,6 @@
 package com.mikarosek5.numberslight.feature_numbers_and_images.presentation.numbers_light
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -24,7 +25,7 @@ class NumberLightListViewModel @Inject constructor(
         disposable.add(
             numberList().subscribe(
                 {onConsume-> _list.postValue(onConsume)},
-                {onError-> TODO("Not Implemented") }
+                {onError-> Log.d("This is my error", onError.message?:"No message") }
             )
         )
     }

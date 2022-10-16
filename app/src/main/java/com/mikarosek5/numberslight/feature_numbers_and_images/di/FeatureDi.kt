@@ -7,6 +7,7 @@ import com.mikarosek5.numberslight.feature_numbers_and_images.data.repository.Nu
 import com.mikarosek5.numberslight.feature_numbers_and_images.domain.repository.NumbersRepository
 import com.mikarosek5.numberslight.feature_numbers_and_images.domain.use_cases.GetNumberLightDetailsUseCase
 import com.mikarosek5.numberslight.feature_numbers_and_images.domain.use_cases.GetNumbersLightsListUseCase
+import com.mikarosek5.numberslight.feature_numbers_and_images.domain.util.connectivity_observer.NetworkConnectivityObserver
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -47,4 +48,8 @@ object FeatureDi {
     @Provides
     fun provideNumberListUseCase(repository: NumbersRepository): GetNumbersLightsListUseCase =
         GetNumbersLightsListUseCase(repository)
+
+    @Singleton
+    @Provides
+    fun provideInternetObserver():NetworkConnectivityObserver = NetworkConnectivityObserver()
 }

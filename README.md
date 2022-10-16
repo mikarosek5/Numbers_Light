@@ -3,7 +3,7 @@
 
 Recruitment task given by recruitment team.
 
-I had to create Android application which cosume json data from REST API endpoint,
+I had to create Android application which consume json data from REST API endpoint,
 and display it to the user as list screen and details screen.
 
 

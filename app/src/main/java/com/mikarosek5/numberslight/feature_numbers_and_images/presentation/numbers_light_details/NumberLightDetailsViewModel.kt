@@ -24,7 +24,7 @@ class NumberLightDetailsViewModel @Inject constructor(
     fun getDetail(id: String) {
         disposable.add(numberDetails(id).subscribe (
             {onConsume-> _detail.postValue(onConsume)},
-            {onError-> TODO("Not implemented yet") }
+            {onError->  }
         ))
     }
 

@@ -7,7 +7,9 @@ import com.mikarosek5.numberslight.feature_numbers_and_images.data.repository.Nu
 import com.mikarosek5.numberslight.feature_numbers_and_images.domain.repository.NumbersRepository
 import com.mikarosek5.numberslight.feature_numbers_and_images.domain.use_cases.GetNumberLightDetailsUseCase
 import com.mikarosek5.numberslight.feature_numbers_and_images.domain.use_cases.GetNumbersLightsListUseCase
-import com.mikarosek5.numberslight.feature_numbers_and_images.domain.util.connectivity_observer.NetworkConnectivityObserver
+import com.mikarosek5.numberslight.feature_numbers_and_images.data.data_source.connectivity_observer.NetworkConnectivityObserver
+import com.mikarosek5.numberslight.feature_numbers_and_images.domain.use_cases.GetNetworkStatus
+import com.mikarosek5.numberslight.feature_numbers_and_images.domain.use_cases.wrappers.LightNumbersUseCases
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -36,8 +38,15 @@ object FeatureDi {
 
     @Singleton
     @Provides
-    fun provideRepository(networkSource: NumbersNetworkSource): NumbersRepository =
-        NumbersRepositoryImpl(networkSource)
+    fun provideInternetObserver(): NetworkConnectivityObserver = NetworkConnectivityObserver()
+
+    @Singleton
+    @Provides
+    fun provideRepository(
+        networkSource: NumbersNetworkSource,
+        networkConnectivityObserver: NetworkConnectivityObserver
+    ): NumbersRepository =
+        NumbersRepositoryImpl(networkSource,networkConnectivityObserver)
 
     @Singleton
     @Provides
@@ -51,5 +60,16 @@ object FeatureDi {
 
     @Singleton
     @Provides
-    fun provideInternetObserver():NetworkConnectivityObserver = NetworkConnectivityObserver()
+    fun provideNetworkStatusUseCase(repository: NumbersRepository): GetNetworkStatus =
+        GetNetworkStatus(repository)
+
+    @Singleton
+    @Provides
+    fun provideLightNumbersUseCases(repository: NumbersRepository): LightNumbersUseCases =
+        LightNumbersUseCases(
+            GetNetworkStatus(repository),
+            GetNumbersLightsListUseCase(repository)
+        )
+
+
 }

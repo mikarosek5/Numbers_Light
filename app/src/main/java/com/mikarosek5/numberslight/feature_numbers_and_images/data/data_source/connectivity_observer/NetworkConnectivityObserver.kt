@@ -1,4 +1,4 @@
-package com.mikarosek5.numberslight.feature_numbers_and_images.domain.util.connectivity_observer
+package com.mikarosek5.numberslight.feature_numbers_and_images.data.data_source.connectivity_observer
 
 import io.reactivex.rxjava3.core.Observable
 import java.net.InetAddress

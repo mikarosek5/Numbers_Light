@@ -7,8 +7,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.FragmentContainerView
 import com.mikarosek5.numberslight.R
-import com.mikarosek5.numberslight.feature_numbers_and_images.domain.util.connectivity_observer.ConnectivityObserver
-import com.mikarosek5.numberslight.feature_numbers_and_images.domain.util.connectivity_observer.NetworkConnectivityObserver
+import com.mikarosek5.numberslight.feature_numbers_and_images.data.data_source.connectivity_observer.ConnectivityObserver
+import com.mikarosek5.numberslight.feature_numbers_and_images.data.data_source.connectivity_observer.NetworkConnectivityObserver
 import com.mikarosek5.numberslight.feature_numbers_and_images.presentation.numbers_light.NumberLightListFragment
 import com.mikarosek5.numberslight.feature_numbers_and_images.presentation.numbers_light_details.NumberLightDetailFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,8 +20,7 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity(), NumberLightListFragment.FragmentListener {
 
 
-    @Inject
-    lateinit var connectivityObserver: NetworkConnectivityObserver
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,16 +29,8 @@ class MainActivity : AppCompatActivity(), NumberLightListFragment.FragmentListen
             R.id.fragment_container_view,
             NumberLightListFragment()
         ).setReorderingAllowed(false).commit()
-        observeInternetConnection()
     }
 
-    private fun observeInternetConnection() {
-        connectivityObserver.getStatus()
-            .observeOn(Schedulers.newThread())
-            .subscribe {
-                Log.d("This is my internet",it.name)
-            }
-    }
 
     override fun onClick(id: String) {
         val containerViewDetail =
@@ -51,8 +42,7 @@ class MainActivity : AppCompatActivity(), NumberLightListFragment.FragmentListen
                     arguments = Bundle().apply { putString("id", id) }
                 }
             ).setReorderingAllowed(true).addToBackStack("main").commit()
-        } else
-        {
+        } else {
             supportFragmentManager.beginTransaction().replace(
                 R.id.fragment_container_view_detail,
                 NumberLightDetailFragment().apply {

@@ -5,11 +5,15 @@ import com.mikarosek5.numberslight.feature_numbers_and_images.data.data_source.r
 import com.mikarosek5.numberslight.feature_numbers_and_images.domain.model.NumberLight
 import com.mikarosek5.numberslight.feature_numbers_and_images.domain.model.NumberLightDetail
 import com.mikarosek5.numberslight.feature_numbers_and_images.domain.repository.NumbersRepository
+import com.mikarosek5.numberslight.feature_numbers_and_images.data.data_source.connectivity_observer.ConnectivityObserver
 import com.mikarosek5.numberslight.feature_numbers_and_images.domain.util.toNumberDetail
 import com.mikarosek5.numberslight.feature_numbers_and_images.domain.util.toNumberLight
 import io.reactivex.rxjava3.core.Observable
 
-class NumbersRepositoryImpl(private val networkSource: NumbersNetworkSource) : NumbersRepository {
+class NumbersRepositoryImpl(
+    private val networkSource: NumbersNetworkSource,
+    private val connectivityObserver: ConnectivityObserver
+) : NumbersRepository {
     override fun getNumbersLightsList(): Observable<List<NumberLight>> {
         return networkSource.getList().map { it.map { item -> item.toNumberLight() } }
     }
@@ -17,4 +21,7 @@ class NumbersRepositoryImpl(private val networkSource: NumbersNetworkSource) : N
     override fun getNumberLightDetails(id: String): Observable<NumberLightDetail> {
         return networkSource.getDetails(id).map { it.toNumberDetail() }
     }
+
+    override fun getNetworkStatus(): Observable<ConnectivityObserver.Status> =
+        connectivityObserver.getStatus()
 }

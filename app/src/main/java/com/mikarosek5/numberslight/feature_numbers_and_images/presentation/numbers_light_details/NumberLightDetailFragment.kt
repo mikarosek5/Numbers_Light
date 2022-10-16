@@ -21,11 +21,9 @@ class NumberLightDetailFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        Toast.makeText(this.context,this.arguments?.getString("id"),Toast.LENGTH_LONG).show()
         this.arguments?.let {
             val id = it.getString("id")
             if (id != null) {
-                Toast.makeText(this.context,it.toString(),Toast.LENGTH_LONG).show() //todo remove
                 viewModel.getDetail(id)
             }
             else{

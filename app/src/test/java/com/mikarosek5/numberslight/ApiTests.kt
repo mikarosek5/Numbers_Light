@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
  */
 class ApiTests {
 
-    fun provideApi() : NumbersLightRemote = Retrofit.Builder()
+    private fun provideApi() : NumbersLightRemote = Retrofit.Builder()
         .baseUrl("http://dev.tapptic.com/test/json.php/")
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(RxJava3CallAdapterFactory.create()).build()

@@ -6,12 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.mikarosek5.numberslight.feature_numbers_and_images.data.data_source.connectivity_observer.ConnectivityObserver
 import com.mikarosek5.numberslight.feature_numbers_and_images.domain.model.NumberLight
-import com.mikarosek5.numberslight.feature_numbers_and_images.domain.use_cases.GetNumbersLightsListUseCase
 import com.mikarosek5.numberslight.feature_numbers_and_images.domain.use_cases.wrappers.LightNumbersUseCases
-import dagger.hilt.android.lifecycle.HiltViewModel
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
 class NumberLightListViewModel @Inject constructor(

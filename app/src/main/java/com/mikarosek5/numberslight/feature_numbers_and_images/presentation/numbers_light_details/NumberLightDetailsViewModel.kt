@@ -3,12 +3,9 @@ package com.mikarosek5.numberslight.feature_numbers_and_images.presentation.numb
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.mikarosek5.numberslight.feature_numbers_and_images.domain.model.NumberLight
 import com.mikarosek5.numberslight.feature_numbers_and_images.domain.model.NumberLightDetail
 import com.mikarosek5.numberslight.feature_numbers_and_images.domain.use_cases.GetNumberLightDetailsUseCase
-import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
 class NumberLightDetailsViewModel @Inject constructor(
